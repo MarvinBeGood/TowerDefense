@@ -1,0 +1,72 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scripts/CloseButton.gd" type="Script" id=1]
+[ext_resource path="res://scripts/OptionsButton.gd" type="Script" id=2]
+
+[node name="MainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="BackgroundColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -1.0
+margin_top = -1.0
+margin_right = -1.0
+margin_bottom = -1.0
+color = Color( 0.121569, 0.615686, 0.858824, 1 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -1.0
+margin_right = -1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 654.0
+margin_right = 2560.0
+margin_bottom = 786.0
+alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/HBoxContainer"]
+margin_left = 1233.0
+margin_right = 1326.0
+margin_bottom = 132.0
+
+[node name="PlayButton" type="Button" parent="VBoxContainer/HBoxContainer/GridContainer"]
+margin_right = 93.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 0, 30 )
+text = "Play"
+
+[node name="ArchivmentsButton" type="Button" parent="VBoxContainer/HBoxContainer/GridContainer"]
+margin_top = 34.0
+margin_right = 93.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 0, 30 )
+text = "Archivments"
+
+[node name="OptionsButton" type="Button" parent="VBoxContainer/HBoxContainer/GridContainer"]
+margin_top = 68.0
+margin_right = 93.0
+margin_bottom = 98.0
+rect_min_size = Vector2( 0, 30 )
+text = "Options"
+script = ExtResource( 2 )
+
+[node name="CloseButton" type="Button" parent="VBoxContainer/HBoxContainer/GridContainer"]
+margin_top = 102.0
+margin_right = 93.0
+margin_bottom = 132.0
+rect_min_size = Vector2( 0, 30 )
+text = "Close"
+script = ExtResource( 1 )
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/GridContainer/OptionsButton" to="VBoxContainer/HBoxContainer/GridContainer/OptionsButton" method="_on_OptionsButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/GridContainer/CloseButton" to="VBoxContainer/HBoxContainer/GridContainer/CloseButton" method="_on_CloseButton_pressed"]
