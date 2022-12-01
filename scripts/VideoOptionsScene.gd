@@ -56,7 +56,7 @@ func _on_FullscreenCheckBox_toggled(button_pressed):
 	ResolutionOptionButton.set_text(max_resolution_as_text)
 
 func _on_VsyncCheckBox_toggled(button_pressed):
-	VideoControl.update_vsync(button_pressed)
+	VideoControl.activate_vsync(button_pressed)
 
 
 func _on_FXAACheckBox_toggled(button_pressed):

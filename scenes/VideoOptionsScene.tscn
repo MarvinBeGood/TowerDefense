@@ -13,24 +13,24 @@ alignment = 1
 script = ExtResource( 1 )
 
 [node name="VSeparator" type="VSeparator" parent="."]
-margin_right = 850.0
-margin_bottom = 1440.0
+margin_right = 338.0
+margin_bottom = 600.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/separator = SubResource( 1 )
 
 [node name="VideoOptionsVBoxContainer" type="VBoxContainer" parent="."]
-margin_left = 854.0
-margin_right = 1705.0
-margin_bottom = 1440.0
+margin_left = 342.0
+margin_right = 681.0
+margin_bottom = 600.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 
 [node name="ResolutionHBoxContainer" type="HBoxContainer" parent="VideoOptionsVBoxContainer"]
-margin_top = 656.0
-margin_right = 851.0
-margin_bottom = 676.0
+margin_top = 236.0
+margin_right = 339.0
+margin_bottom = 256.0
 
 [node name="ResolutionLabel" type="Label" parent="VideoOptionsVBoxContainer/ResolutionHBoxContainer"]
 margin_top = 3.0
@@ -39,15 +39,15 @@ margin_bottom = 17.0
 text = "Resolution:"
 
 [node name="ResolutionOptionButton" type="OptionButton" parent="VideoOptionsVBoxContainer/ResolutionHBoxContainer"]
-margin_left = 822.0
-margin_right = 851.0
+margin_left = 310.0
+margin_right = 339.0
 margin_bottom = 20.0
 size_flags_horizontal = 10
 
 [node name="FullscreenHBoxContainer" type="HBoxContainer" parent="VideoOptionsVBoxContainer"]
-margin_top = 680.0
-margin_right = 851.0
-margin_bottom = 704.0
+margin_top = 260.0
+margin_right = 339.0
+margin_bottom = 284.0
 
 [node name="FullscreenLabel" type="Label" parent="VideoOptionsVBoxContainer/FullscreenHBoxContainer"]
 margin_top = 5.0
@@ -56,15 +56,15 @@ margin_bottom = 19.0
 text = "Fullscreen:"
 
 [node name="FullscreenCheckBox" type="CheckBox" parent="VideoOptionsVBoxContainer/FullscreenHBoxContainer"]
-margin_left = 827.0
-margin_right = 851.0
+margin_left = 315.0
+margin_right = 339.0
 margin_bottom = 24.0
 size_flags_horizontal = 10
 
 [node name="VsyncHBoxContainer" type="HBoxContainer" parent="VideoOptionsVBoxContainer"]
-margin_top = 708.0
-margin_right = 851.0
-margin_bottom = 732.0
+margin_top = 288.0
+margin_right = 339.0
+margin_bottom = 312.0
 
 [node name="VsyncLabel" type="Label" parent="VideoOptionsVBoxContainer/VsyncHBoxContainer"]
 margin_top = 5.0
@@ -74,15 +74,15 @@ rect_pivot_offset = Vector2( -165, -53 )
 text = "Vsync:"
 
 [node name="VsyncCheckBox" type="CheckBox" parent="VideoOptionsVBoxContainer/VsyncHBoxContainer"]
-margin_left = 827.0
-margin_right = 851.0
+margin_left = 315.0
+margin_right = 339.0
 margin_bottom = 24.0
 size_flags_horizontal = 10
 
 [node name="FXAAHBoxContainer" type="HBoxContainer" parent="VideoOptionsVBoxContainer"]
-margin_top = 736.0
-margin_right = 851.0
-margin_bottom = 760.0
+margin_top = 316.0
+margin_right = 339.0
+margin_bottom = 340.0
 
 [node name="FXAALabel" type="Label" parent="VideoOptionsVBoxContainer/FXAAHBoxContainer"]
 margin_top = 5.0
@@ -91,15 +91,15 @@ margin_bottom = 19.0
 text = "FXAA:"
 
 [node name="FXAACheckBox" type="CheckBox" parent="VideoOptionsVBoxContainer/FXAAHBoxContainer"]
-margin_left = 827.0
-margin_right = 851.0
+margin_left = 315.0
+margin_right = 339.0
 margin_bottom = 24.0
 size_flags_horizontal = 10
 
 [node name="MSAAHBoxContainer" type="HBoxContainer" parent="VideoOptionsVBoxContainer"]
-margin_top = 764.0
-margin_right = 851.0
-margin_bottom = 784.0
+margin_top = 344.0
+margin_right = 339.0
+margin_bottom = 364.0
 
 [node name="MSAALabel" type="Label" parent="VideoOptionsVBoxContainer/MSAAHBoxContainer"]
 margin_top = 3.0
@@ -108,15 +108,15 @@ margin_bottom = 17.0
 text = "MSAA"
 
 [node name="MSAAOptionButton" type="OptionButton" parent="VideoOptionsVBoxContainer/MSAAHBoxContainer"]
-margin_left = 822.0
-margin_right = 851.0
+margin_left = 310.0
+margin_right = 339.0
 margin_bottom = 20.0
 size_flags_horizontal = 10
 
 [node name="VSeparator2" type="VSeparator" parent="."]
-margin_left = 1709.0
-margin_right = 2560.0
-margin_bottom = 1440.0
+margin_left = 685.0
+margin_right = 1024.0
+margin_bottom = 600.0
 size_flags_horizontal = 3
 custom_styles/separator = SubResource( 2 )
 

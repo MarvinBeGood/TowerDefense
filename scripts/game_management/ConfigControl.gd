@@ -23,7 +23,7 @@ const options: Dictionary = {
 func load_config_or_set_default_config():
 	
 	config.load(config_filepath)
-
+	
 	set_window_resolution(String(OS.get_screen_size().x)+"x"+String(OS.get_screen_size().y))
 
 	set_fullscreen_is_activ(true)
