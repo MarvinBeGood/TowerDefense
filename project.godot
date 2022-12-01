@@ -24,13 +24,25 @@ config/name="TowerDefense"
 run/main_scene="res://scenes/MainMenu.tscn"
 config/icon="res://images/icon.png"
 
+[audio]
+
+default_bus_layout="res://audio/default_bus_layout.tres"
+
+[autoload]
+
+SaveGameControl="*res://scripts/game_management/SaveGameControl.gd"
+ConfigControl="*res://scripts/game_management/ConfigControl.gd"
+VideoControl="*res://scripts/game_management/VideoControl.gd"
+SoundControl="*res://scripts/game_management/SoundControl.gd"
+
 [display]
 
 window/size/width=2560
 window/size/height=1440
 window/size/borderless=true
-window/size/fullscreen=true
+window/size/always_on_top=true
 window/vsync/use_vsync=false
+window/energy_saving/keep_screen_on=false
 
 [editor]
 

@@ -1,0 +1,99 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scripts/MusicOptionsScene.gd" type="Script" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[node name="MusicHBoxContainer" type="HBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="VSeparator2" type="VSeparator" parent="."]
+margin_right = 850.0
+margin_bottom = 1440.0
+size_flags_horizontal = 3
+custom_styles/separator = SubResource( 1 )
+
+[node name="MusicOptionsVBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 854.0
+margin_right = 1705.0
+margin_bottom = 1440.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="MasterVolumeHBoxContainer" type="HBoxContainer" parent="MusicOptionsVBoxContainer"]
+margin_top = 692.0
+margin_right = 851.0
+margin_bottom = 708.0
+
+[node name="MasterVolumeLabel" type="Label" parent="MusicOptionsVBoxContainer/MasterVolumeHBoxContainer"]
+margin_top = 1.0
+margin_right = 96.0
+margin_bottom = 15.0
+text = "Total   Volume:"
+
+[node name="MasterVolumeSlider" type="HSlider" parent="MusicOptionsVBoxContainer/MasterVolumeHBoxContainer"]
+margin_left = 151.0
+margin_right = 851.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 700, 0 )
+size_flags_horizontal = 10
+min_value = -50.0
+max_value = 0.0
+
+[node name="MusicVolumeHBoxContainer" type="HBoxContainer" parent="MusicOptionsVBoxContainer"]
+margin_top = 712.0
+margin_right = 851.0
+margin_bottom = 728.0
+
+[node name="MusicVolumeLabel" type="Label" parent="MusicOptionsVBoxContainer/MusicVolumeHBoxContainer"]
+margin_top = 1.0
+margin_right = 95.0
+margin_bottom = 15.0
+text = "Music Volume:"
+
+[node name="MusicVolumeSlider" type="HSlider" parent="MusicOptionsVBoxContainer/MusicVolumeHBoxContainer"]
+margin_left = 151.0
+margin_right = 851.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 700, 0 )
+size_flags_horizontal = 10
+min_value = -50.0
+max_value = 0.0
+
+[node name="EffectVolumeHBoxContainer" type="HBoxContainer" parent="MusicOptionsVBoxContainer"]
+margin_top = 732.0
+margin_right = 851.0
+margin_bottom = 748.0
+
+[node name="EffectVolumeLabel" type="Label" parent="MusicOptionsVBoxContainer/EffectVolumeHBoxContainer"]
+margin_right = 96.0
+margin_bottom = 14.0
+rect_pivot_offset = Vector2( -165, -53 )
+size_flags_vertical = 0
+text = "Effect  Volume:"
+
+[node name="EffectVolumeSlider" type="HSlider" parent="MusicOptionsVBoxContainer/EffectVolumeHBoxContainer"]
+margin_left = 151.0
+margin_right = 851.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 700, 16 )
+size_flags_horizontal = 10
+min_value = -50.0
+max_value = 0.0
+
+[node name="VSeparator" type="VSeparator" parent="."]
+margin_left = 1709.0
+margin_right = 2560.0
+margin_bottom = 1440.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/separator = SubResource( 2 )
+
+[connection signal="value_changed" from="MusicOptionsVBoxContainer/MasterVolumeHBoxContainer/MasterVolumeSlider" to="." method="_on_MasterVolumeSlider_value_changed"]
+[connection signal="value_changed" from="MusicOptionsVBoxContainer/MusicVolumeHBoxContainer/MusicVolumeSlider" to="." method="_on_MusicVolumeSlider_value_changed"]
+[connection signal="value_changed" from="MusicOptionsVBoxContainer/EffectVolumeHBoxContainer/EffectVolumeSlider" to="." method="_on_EffectVolumeSlider_value_changed"]
