@@ -17,10 +17,13 @@ var msaa_modes: Dictionary = {"Disabled": 0,
 								"x4":2,
 								"x8":3,
 								"x16":4}
+var default_resolution = "1024x600"
 
+var max_window_resolution = String(OS.get_screen_size().x)+"x"+String(OS.get_screen_size().y)
 
 func _ready():
-	OS.set_window_size(window_resolutions[ConfigControl.get_window_resolution()])
+
+	OS.set_window_size(window_resolutions.get(ConfigControl.get_window_resolution()))
 	OS.set_window_fullscreen(ConfigControl.get_fullscreen_is_activ())
 	OS.set_use_vsync(ConfigControl.get_vsync_is_activ())
 	OS.set_window_resizable(ConfigControl.get_window_resizable())
@@ -37,21 +40,16 @@ func update_window_resolution(resolution:String)->void:
 	ConfigControl.save_config()
 
 
-func activate_window_fullscreen(activate:bool)->String:
+func activate_window_fullscreen(activate:bool)->void:
 	OS.set_window_fullscreen(activate)
-	var max_resolution_as_text = String(OS.get_screen_size().x)+"x"+String(OS.get_screen_size().y)
 	if !activate:
-		var default_resolution_as_text = "1920x1080"
-		OS.set_window_size(VideoControl.window_resolutions[default_resolution_as_text])
+		OS.set_window_size(VideoControl.window_resolutions[ConfigControl.get_window_resolution()])
 		OS.center_window()
-		max_resolution_as_text = default_resolution_as_text
 	
 	OS.set_window_resizable(!activate)
-	ConfigControl.set_window_resolution(max_resolution_as_text,true)
 	ConfigControl.set_window_resizable(!activate,true)
 	ConfigControl.set_fullscreen_is_activ(activate,true)
 	ConfigControl.save_config()
-	return max_resolution_as_text
 
 
 func activate_vsync(activate:bool)->void:
@@ -68,3 +66,12 @@ func update_msaa_mode(msaa_mode:String)->void:
 	get_viewport().set_msaa(msaa_modes[msaa_mode])
 	ConfigControl.set_msaa_mode(msaa_mode,true)
 	ConfigControl.save_config()
+
+#func get_index_for_key_in_dict(expected_key:String,dictionary)->int:
+#	var index = 0
+#	
+#	for entry in dictionary:
+#		if entry  == expected_key:
+#			return index
+#		index += 1
+#	return 0

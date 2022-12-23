@@ -5,18 +5,21 @@ var config_data = {}
 
 const config_filepath = "user://towerdefense_config.ini"
 const player_name = "player"
+
 var config = ConfigFile.new()
 
+
 const options: Dictionary = {
-	window_resolution= "window_resolution",
+	language = "language",
+	window_resolution = "window_resolution",
 	fullscreen_is_activ = "fullscreen_is_activ",
-	window_resizable="window_resizable",
-	vsync_is_activ="vsync_is_activ",
-	fxaa_is_activ="fxaa_is_activ",
-	msaa_mode="msaa_mode",
-	master_volume="master_volume",
-	music_volume="music_volume",
-	effect_volume="effect_volume"
+	window_resizable = "window_resizable",
+	vsync_is_activ = "vsync_is_activ",
+	fxaa_is_activ = "fxaa_is_activ",
+	msaa_mode = "msaa_mode",
+	master_volume = "master_volume",
+	music_volume = "music_volume",
+	effect_volume = "effect_volume"
 }
 
 
@@ -24,7 +27,9 @@ func load_config_or_set_default_config():
 	
 	config.load(config_filepath)
 	
-	set_window_resolution(String(OS.get_screen_size().x)+"x"+String(OS.get_screen_size().y))
+	set_language("English")
+	
+	set_window_resolution(VideoControl.default_resolution)
 
 	set_fullscreen_is_activ(true)
 
@@ -44,11 +49,17 @@ func load_config_or_set_default_config():
 		
 func _ready():
 	load_config_or_set_default_config()
+
 	save_config()
 
 
 func check_if_key_value_should_be_overwritten(key_name:String,overwrite:bool)-> bool:
 	return !config.has_section_key(player_name,key_name) || overwrite
+
+func set_language(language:String,overwrite:bool=false)-> void:
+	var key_name = options.language
+	if check_if_key_value_should_be_overwritten(key_name,overwrite):
+		config.set_value(player_name,key_name,language)
 
 
 func set_window_resolution(window_resolution:String,overwrite:bool=false)-> void:
@@ -98,7 +109,8 @@ func set_effect_volume(effect_volume:float,overwrite:bool=false)-> void:
 		config.set_value(player_name,key_name,effect_volume)
 	
 	
-
+func get_language()-> String:
+	 return config.get_value(player_name,options.language)
 	
 func get_window_resolution()-> String:
 	 return config.get_value(player_name,options.window_resolution)
@@ -131,3 +143,6 @@ func get_effect_volume()-> float:
 
 func save_config()-> void:
 	config.save(config_filepath)
+
+func delete_config_for_player(player:String):
+	config.erase_section(player)

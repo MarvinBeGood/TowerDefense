@@ -1,0 +1,77 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://images/enemies/mini_blue_enemy.png" type="Texture" id=2]
+
+[sub_resource type="GDScript" id=7]
+script/source = "extends KinematicBody2D
+
+var speed = 50
+var path : = PoolVector2Array()
+
+func _ready():
+	connect(\"update_path\",self,\"update_path\")
+
+func update_path(new_path):
+	path = new_path
+
+func _process(delta):
+	# Calculate the movement distance for this frame
+	var distance_to_walk = speed * delta
+	
+	# Move the player along the path until he has run out of movement or the path ends.
+	while distance_to_walk > 0 and path.size() > 0:
+		var distance_to_next_point = position.distance_to(path[0])
+		if distance_to_walk <= distance_to_next_point:
+			# The player does not have enough movement left to get to the next point.
+			position += position.direction_to(path[0]) * distance_to_walk
+		else:
+			# The player get to the next point
+			position = path[0]
+			path.remove(0)
+		# Update the distance to walk
+		distance_to_walk -= distance_to_next_point
+"
+
+[sub_resource type="AtlasTexture" id=1]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=2]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 24, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=3]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 48, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=4]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 72, 0, 24, 24 )
+
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=6]
+radius = 9.5
+height = 1.0
+
+[node name="KinematicBody2D" type="KinematicBody2D"]
+script = SubResource( 7 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 5 )
+speed_scale = 2.0
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 3 )
+shape = SubResource( 6 )

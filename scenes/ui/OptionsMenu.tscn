@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://scenes/VideoOptionsScene.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scripts/BackButton.gd" type="Script" id=2]
+[ext_resource path="res://scenes/ui/VideoOptionsScene.tscn" type="PackedScene" id=1]
 [ext_resource path="res://SimpleTheme.tres" type="Theme" id=3]
-[ext_resource path="res://scenes/MusicOptionsScene.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/ui/MusicOptionsScene.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/ui/LanguageOptionMenu.tscn" type="PackedScene" id=5]
 
 [sub_resource type="StyleBoxLine" id=1]
 content_margin_right = 12.0
@@ -14,18 +14,20 @@ content_margin_bottom = 10.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-size_flags_horizontal = 0
-size_flags_vertical = 0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="TabContainer" type="TabContainer" parent="PanelContainer"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 1017.0
-margin_bottom = 593.0
+margin_bottom = 607.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/tab_fg = SubResource( 1 )
@@ -39,17 +41,34 @@ margin_bottom = -4.0
 
 [node name="Music" parent="PanelContainer/TabContainer" instance=ExtResource( 4 )]
 visible = false
-margin_top = 24.0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 0.0
+margin_top = 42.0
+margin_right = 0.0
+margin_bottom = 0.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Language" parent="PanelContainer/TabContainer" instance=ExtResource( 5 )]
+visible = false
+margin_top = 42.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="BackButton" type="Button" parent="PanelContainer"]
 margin_left = 7.0
-margin_top = 553.0
+margin_top = 567.0
 margin_right = 1017.0
-margin_bottom = 593.0
+margin_bottom = 607.0
 rect_min_size = Vector2( 0, 40 )
-size_flags_vertical = 8
+size_flags_vertical = 10
 theme = ExtResource( 3 )
+shortcut_in_tooltip = false
 text = "Back"
-script = ExtResource( 2 )
-
-[connection signal="pressed" from="PanelContainer/BackButton" to="PanelContainer/BackButton" method="_on_BackButton_pressed"]

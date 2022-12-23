@@ -1,0 +1,126 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scripts/LoadoutControlScene.gd" type="Script" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[sub_resource type="StyleBoxEmpty" id=4]
+
+[node name="LoadoutControl" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ProfileStatsHBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_right = 1024.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 1024, 40 )
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/ProfileStatsHBoxContainer"]
+margin_right = 253.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/separator = SubResource( 1 )
+
+[node name="ProfileNameRichTextLabel" type="RichTextLabel" parent="VBoxContainer/ProfileStatsHBoxContainer"]
+margin_left = 257.0
+margin_right = 510.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "
+"
+
+[node name="ProfileLevelRichTextLabel" type="RichTextLabel" parent="VBoxContainer/ProfileStatsHBoxContainer"]
+margin_left = 514.0
+margin_right = 767.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ProfileExperienceRichTextLabel" type="RichTextLabel" parent="VBoxContainer/ProfileStatsHBoxContainer"]
+margin_left = 771.0
+margin_right = 1024.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+margin_top = 44.0
+margin_right = 1024.0
+margin_bottom = 344.0
+rect_min_size = Vector2( 1024, 300 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/separator = SubResource( 2 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 348.0
+margin_right = 1024.0
+margin_bottom = 600.0
+size_flags_vertical = 3
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/HBoxContainer"]
+margin_right = 408.0
+margin_bottom = 252.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/separator = SubResource( 3 )
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/HBoxContainer"]
+margin_left = 412.0
+margin_right = 612.0
+margin_bottom = 252.0
+rect_min_size = Vector2( 200, 0 )
+
+[node name="SelectMissionButton" type="Button" parent="VBoxContainer/HBoxContainer/GridContainer"]
+margin_right = 200.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
+size_flags_horizontal = 3
+text = "Select Mission"
+icon_align = 1
+
+[node name="TechtreeButton" type="Button" parent="VBoxContainer/HBoxContainer/GridContainer"]
+margin_top = 44.0
+margin_right = 200.0
+margin_bottom = 84.0
+rect_min_size = Vector2( 0, 40 )
+size_flags_horizontal = 3
+text = "Show Techtree"
+icon_align = 1
+
+[node name="InventoryButton" type="Button" parent="VBoxContainer/HBoxContainer/GridContainer"]
+margin_top = 88.0
+margin_right = 200.0
+margin_bottom = 128.0
+rect_min_size = Vector2( 0, 40 )
+size_flags_horizontal = 3
+text = "Show Inventory"
+icon_align = 1
+
+[node name="BackButton" type="Button" parent="VBoxContainer/HBoxContainer/GridContainer"]
+margin_top = 132.0
+margin_right = 200.0
+margin_bottom = 172.0
+rect_min_size = Vector2( 0, 40 )
+size_flags_horizontal = 3
+text = "Back"
+icon_align = 1
+
+[node name="VSeparator2" type="VSeparator" parent="VBoxContainer/HBoxContainer"]
+margin_left = 616.0
+margin_right = 1024.0
+margin_bottom = 252.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/separator = SubResource( 4 )

@@ -12,8 +12,7 @@ func _ready():
 func read_file():
 	var file = File.new()
 	if ! file.file_exists(savegame_filepath):
-		save_data = {
-		}
+		save_data = {"player_name":"player"}
 		save_game()
 	file.open(savegame_filepath,File.READ)
 	var file_content = file.get_as_text()
