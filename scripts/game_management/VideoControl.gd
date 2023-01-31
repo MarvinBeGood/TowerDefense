@@ -15,8 +15,8 @@ var window_resolutions: Dictionary = {"3840x2160":Vector2(3840,2160),
 var msaa_modes: Dictionary = {"Disabled": 0,
 								"x2":1,
 								"x4":2,
-								"x8":3,
-								"x16":4}
+								"x8":3 
+								}
 var default_resolution = "1024x600"
 
 var max_window_resolution = String(OS.get_screen_size().x)+"x"+String(OS.get_screen_size().y)
@@ -26,7 +26,7 @@ func _ready():
 	OS.set_window_size(window_resolutions.get(ConfigControl.get_window_resolution()))
 	OS.set_window_fullscreen(ConfigControl.get_fullscreen_is_activ())
 	OS.set_use_vsync(ConfigControl.get_vsync_is_activ())
-	OS.set_window_resizable(ConfigControl.get_window_resizable())
+	OS.set_window_resizable(false)
 	OS.center_window()
 	get_viewport().set_use_fxaa(ConfigControl.get_fxaa_is_activ())
 	get_viewport().set_msaa(msaa_modes[ConfigControl.get_msaa_mode()])
@@ -46,8 +46,8 @@ func activate_window_fullscreen(activate:bool)->void:
 		OS.set_window_size(VideoControl.window_resolutions[ConfigControl.get_window_resolution()])
 		OS.center_window()
 	
-	OS.set_window_resizable(!activate)
-	ConfigControl.set_window_resizable(!activate,true)
+	OS.set_window_resizable(false)
+	ConfigControl.set_window_resizable(false,true)
 	ConfigControl.set_fullscreen_is_activ(activate,true)
 	ConfigControl.save_config()
 

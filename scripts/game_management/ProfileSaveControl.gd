@@ -25,6 +25,7 @@ func read_file()->Dictionary:
 	return data
 
 func save_game()->void:
+	
 	var save_game = File.new()
 	save_data.profiles = convert_profiles_to_dicts()
 	save_game.open(profiles_filepath,File.WRITE)
@@ -46,12 +47,12 @@ func get_profiles()->Array:
 
 
 
-func add_profil(profile:ProfileInterface.Profile)->void:
+func add_profile(profile:ProfileInterface.Profile)->void:
 	profiles_as_objects.append(profile)
 	save_game()
 
 
-func change_profil(profile:ProfileInterface.Profile)-> void:
+func change_profile(profile:ProfileInterface.Profile)-> void:
 	profiles_as_objects = get_profiles()
 	var new_profile_objects = []
 	for profil_object in profiles_as_objects:
@@ -62,15 +63,16 @@ func change_profil(profile:ProfileInterface.Profile)-> void:
 	save_game()
 	
 
-func get_profil_by_profil_name(profile_name:String)->ProfileInterface.Profile:
+func get_profile_by_profile_name(profile_name:String)->ProfileInterface.Profile:
 	profiles_as_objects = get_profiles()
-	var selected_profil_object = ProfileInterface.Profile.new('player',1,0,100)
-	for profil_object in profiles_as_objects:
-		if profil_object.profile_name == profile_name:
-			selected_profil_object = profil_object
-	return selected_profil_object
 
-func delete_profil_by_profil_name(profile_name:String)->void:
+	var selected_profile_object 
+	for profile_object in profiles_as_objects:
+		if profile_object.profile_name == profile_name:
+			selected_profile_object = profile_object
+	return selected_profile_object
+
+func delete_profile_by_profile_name(profile_name:String)->void:
 	profiles_as_objects = get_profiles()
 	var index = 0
 	

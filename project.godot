@@ -9,15 +9,35 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node",
+"class": "EnemyDefaultValues",
+"language": "GDScript",
+"path": "res://scripts/Classes/EnemyDefaultValues.gd"
+}, {
+"base": "Node",
+"class": "EnemyInterface",
+"language": "GDScript",
+"path": "res://scripts/Classes/EnemyInterface.gd"
+}, {
 "base": "TileMap",
 "class": "InteractiveTilemap",
 "language": "GDScript",
 "path": "res://scripts/Classes/InteractiveTilemap.gd"
 }, {
+"base": "Node",
+"class": "LevelInterface",
+"language": "GDScript",
+"path": "res://scripts/Classes/LevelInterface.gd"
+}, {
 "base": "Control",
 "class": "LoadoutControl",
 "language": "GDScript",
 "path": "res://scripts/LoadoutControlScene.gd"
+}, {
+"base": "Node2D",
+"class": "MissionInterface",
+"language": "GDScript",
+"path": "res://scripts/Classes/MissionInterface.gd"
 }, {
 "base": "Node2D",
 "class": "ProfileInterface",
@@ -28,12 +48,28 @@ _global_script_classes=[ {
 "class": "Tower",
 "language": "GDScript",
 "path": "res://scripts/Classes/Tower.gd"
+}, {
+"base": "Node",
+"class": "WaveInterface",
+"language": "GDScript",
+"path": "res://scripts/Classes/WaveInterface.gd"
+}, {
+"base": "Node",
+"class": "tutorial_map",
+"language": "GDScript",
+"path": "res://scripts/maps/tutorial_map.gd"
 } ]
 _global_script_class_icons={
+"EnemyDefaultValues": "",
+"EnemyInterface": "",
 "InteractiveTilemap": "",
+"LevelInterface": "",
 "LoadoutControl": "",
+"MissionInterface": "",
 "ProfileInterface": "",
-"Tower": ""
+"Tower": "",
+"WaveInterface": "",
+"tutorial_map": ""
 }
 
 [application]
@@ -55,8 +91,14 @@ SoundControl="*res://scripts/game_management/SoundControl.gd"
 ProfileSaveControl="*res://scripts/game_management/ProfileSaveControl.gd"
 LanguageControl="*res://scripts/game_management/LanguageControl.gd"
 
+[debug]
+
+settings/fps/force_fps=60
+settings/stdout/print_fps=true
+
 [display]
 
+window/size/resizable=false
 window/size/test_width=1024
 window/size/test_height=600
 window/vsync/use_vsync=false

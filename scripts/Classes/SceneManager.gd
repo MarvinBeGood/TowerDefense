@@ -58,8 +58,16 @@ func on_mission_selection_button_pressed():
 	$LoadoutControl.visible = false
 	var mission_selection_scene_node :Node = preload("res://scenes/ui/MissionSelectionControl.tscn").instance()
 	mission_selection_scene_node.connect("change_to_loadout",self,"on_change_to_loadout_button_pressed")
+	mission_selection_scene_node.connect("change_to_mission",self,"on_change_to_mission_button_pressed")
 	add_child(mission_selection_scene_node,true)
 
 func on_change_to_loadout_button_pressed():
 	$LoadoutControl.visible = true
 	$MissionSelectionControl.queue_free()
+
+func on_change_to_mission_button_pressed(mission_information,current_difficulty):
+	$MissionSelectionControl.queue_free()
+	var game_scene = load("res://scenes/game_scenes/GameScene.tscn").instance()
+	game_scene.mission_information = mission_information
+	game_scene.current_difficulty = current_difficulty
+	add_child(game_scene,true)

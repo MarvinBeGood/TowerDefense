@@ -21,5 +21,3 @@ position = Vector2( 41, -7 )
 
 [node name="RightCannonMuzzlePosition2D" type="Position2D" parent="TowerCannonSprite"]
 position = Vector2( 41, 6 )
-
-[node name="Area2D" type="Area2D" parent="."]

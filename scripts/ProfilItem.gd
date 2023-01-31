@@ -19,8 +19,8 @@ func set_profile_level():
 	$VBoxContainer/CenterGrid/ProfileLevelLable.text = str(profile.profile_level)
 
 func set_profile_amount_of_xp_to_next_level():
-	$VBoxContainer/CenterGrid/ProfileAmountOfXPToNextLevelLable.text = str(profile.current_amount_of_experience)+"/"+str(profile.experience_to_next_level)
-
+	print(profile.return_current_and_max_experience())
+	$VBoxContainer/CenterGrid/ProfileAmountOfXPToNextLevelLable.text = profile.return_current_and_max_experience()
 
 func _on_DeleteProfileButton_pressed():
 	emit_signal("delete_profile_button_pressed",profile)

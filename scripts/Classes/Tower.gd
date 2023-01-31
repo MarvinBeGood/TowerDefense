@@ -2,26 +2,28 @@ extends Node2D
 class_name Tower
 
 var is_build = false
+var tower_name 
 var tower_price 
 var tower_range 
 var tower_damage
-var tower_attack_speed
+var tower_attack_speed :float
 var collision_shape_name = "RangeCollisionShape"
 var shootable_enemies = []
 var area_2d := Area2D.new()
 var area_2d_name = "EnemyDetection"
 var collision_shape_2d := CollisionShape2D.new()
 var circle_shape_2d := CircleShape2D.new()
-var enemy_node_name = "KinematicBody2D"
+var enemy_node_name = "Area2D"
+var arrow_spawn_position : NodePath
 var can_fire = true
-var enemy 
+var enemy = null
 
 
 func _ready():
 	if is_build:
 		area_2d.set_name(area_2d_name)
-		area_2d.connect("body_entered",self,"mark_enemy_as_shootable")
-		area_2d.connect("body_exited",self,"mark_enemy_as_non_shootable")
+		area_2d.connect("area_entered",self,"mark_enemy_as_shootable")
+		area_2d.connect("area_exited",self,"mark_enemy_as_non_shootable")
 		circle_shape_2d.radius = get_tower_range() * 0.5
 		collision_shape_2d.set_name(collision_shape_name)
 		collision_shape_2d.shape = circle_shape_2d
@@ -30,18 +32,20 @@ func _ready():
 		add_child(area_2d)
 
 
-func mark_enemy_as_shootable(enemy:Node):
-	if enemy.get_name()  == enemy_node_name:
-		shootable_enemies.append(enemy.get_parent())
+func mark_enemy_as_shootable(selected_enemy:Area2D):
+	if selected_enemy.is_in_group("enemy"):
+		shootable_enemies.append(selected_enemy.get_parent())
 
-func mark_enemy_as_non_shootable(enemy:Node):
-	if enemy.get_name() == enemy_node_name:
-		shootable_enemies.erase(enemy.get_parent())
+func mark_enemy_as_non_shootable(selected_enemy:Area2D):
+	if selected_enemy.is_in_group("enemy"):
+		var enemy_index = shootable_enemies.find(selected_enemy.get_parent())
+		shootable_enemies.remove(enemy_index)
 
 
 func _physics_process(_delta):
 	if shootable_enemies.size() != 0 and is_build:
 		selelect_enemy()
+		#if not get_node("AnimationPlayer").is_playing():
 		turn()
 		if can_fire:
 			fire()
@@ -49,19 +53,18 @@ func _physics_process(_delta):
 		enemy = null
 
 func selelect_enemy():
-	var offset_of_enemies = []
-	for enemy in shootable_enemies:
-		offset_of_enemies.append(enemy.offset)
-	
-	var enemy_with_max_offset = offset_of_enemies.max()
-	var enemy_index = shootable_enemies.find(enemy_with_max_offset)
-	enemy = shootable_enemies[enemy_index]
+	enemy = shootable_enemies[0]
 
 func fire():
 	can_fire = false
-	enemy.recive_damage(tower_damage)
-	yield(get_tree().create_timer(tower_attack_speed),"timeout")
+	var arrow =  preload("res://scenes/towers/Arrow.tscn").instance()
+	arrow.enemy = enemy
+	arrow.damage = tower_damage
+	get_node(arrow_spawn_position).add_child(arrow)
+	yield(get_tree().create_timer(tower_attack_speed,false),"timeout")
 	can_fire = true
+
+
 
 
 func turn():

@@ -1,6 +1,6 @@
 extends Node2D
 
-var map_node 
+
 var build_mode = false
 var build_valid = false
 var build_tile 
@@ -10,16 +10,23 @@ var start_position
 var end_position
 var enemies_in_wave 
 var current_wave = 0
-
-
+var map_node
+var mission_information : MissionInterface.Mission
+var current_difficulty 
+var base_health
+var current_gold
 
 func _ready():
-
-	
-	map_node = get_node("Map1")
+	map_node = load("res://scenes/maps/"+mission_information.mission_name+".tscn").instance()
+	add_child(map_node)
 	for build_button in get_tree().get_nodes_in_group("build_buttons"):
 		build_button.connect("pressed",self,"initiate_build_mode",[build_button.get_name()])
-
+	base_health = mission_information.base_health
+	current_gold = mission_information.start_gold
+	get_node("UICanvasLayer").set_health_bar_max_health(base_health)
+	get_node("UICanvasLayer").update_health_bar(base_health)
+	get_node("UICanvasLayer").update_gold_amount(current_gold)
+	
 
 func initiate_build_mode(tower_type):
 	if build_mode:
@@ -71,20 +78,33 @@ func verify_and_build():
 		map_node.get_node("TowerExclusionTileMap").set_cellv(build_tile,6)
 		
 
-func start_next_wave():
-	var wave_data = retrive_wave_data()
-	yield(get_tree().create_timer(0.2),"timeout")
-	spawn_enemies(wave_data)
+# wave system
+func spawn_waves():
+		for mapping in mission_information.enemy_waves_mapping_to_difficulty:
+			if mapping.difficulty == current_difficulty:
+				for wave in mapping.enemy_waves:
+					if wave.wave_number >= 2:
+						yield(get_tree().create_timer(wave.time_between_wave,false),"timeout")
+						
+					current_wave = wave.wave_number
+					for enemy in wave.enemies:
+						for _amount in range(enemy.amount_of_enemies):
+							var new_enemy = load("res://scenes/enemies/"+enemy.enemy_name+ ".tscn").instance()
+							new_enemy.enemy = EnemyDefaultValues.get_enemies().get(enemy.enemy_name)
+							new_enemy.connect("has_reached_the_end",self,"receive_damage")
+							new_enemy.connect("was_killed",self,"receive_gold")
+							map_node.get_node("Path2D").add_child(new_enemy,true)
+							yield(get_tree().create_timer(wave.time_between_enemy,false),"timeout")
+
+
+func receive_damage(damage:int):
+	base_health -= damage
+	get_node("UICanvasLayer").update_health_bar(base_health)
+	if base_health <= 0:
+		emit_signal("game_over",false)
+
 	
 	
-func retrive_wave_data():
-	var wave_data = [["Enemy1",0.6],["Enemy1",0.1]]
-	current_wave += 1
-	enemies_in_wave = wave_data.size()
-	return wave_data
-	
-func spawn_enemies(wave_data):
-	for enemy in wave_data:
-		var new_enemy = load("res://scenes/enemies/"+enemy[0]+ ".tscn").instance()
-		map_node.get_node("Path2D").add_child(new_enemy,true)
-		yield(get_tree().create_timer(enemy[1]),"timeout")
+func receive_gold(gold:int):
+	current_gold += gold
+	get_node("UICanvasLayer").update_gold_amount(current_gold)

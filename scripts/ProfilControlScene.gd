@@ -56,15 +56,22 @@ func on_create_new_profile_button_pressed():
 	else:
 		notice_lable.text = ""
 		notice_panel.visible = false
+
 		var profile_item = preload(profile_item_scene).instance()
-		var new_profile = ProfileInterface.Profile.new(new_profile_name,0,0,100)
+		var new_profile = ProfileInterface.Profile.new(new_profile_name, 
+		0, # profile_level
+		0, # current_amount_of_experience
+		LevelInterface.new().get_level_by_number(0).experince, #experience_to_next_level
+		0, # research_points
+		0) # prestige_points
+		
 		profile_item.profile = new_profile
 		profile_item.connect("delete_profile_button_pressed",self,"delete_profile")
 		profile_item.connect("play_with_profile_button_pressed",self,"emit_change_to_loadout_scene")
 		profile_creation_panel.visible = false
 		profiles_vbox_container.visible = true
 		profile_vbox_container.add_child(profile_item)
-		ProfileSaveControl.add_profil(new_profile)
+		ProfileSaveControl.add_profile(new_profile)
 
 
 func on_close_profile_creation_button_pressed():
@@ -103,6 +110,6 @@ func on_accept_delete_profile_button_pressed():
 	for profile_node in profile_vbox_container.get_children():
 		if profile_node.profile.profile_name == selected_profile.profile_name:
 			profile_node.queue_free()
-	ProfileSaveControl.delete_profil_by_profil_name(selected_profile.profile_name)
+	ProfileSaveControl.delete_profile_by_profile_name(selected_profile.profile_name)
 	delete_profile_panel.visible = false
 	profiles_vbox_container.visible = true
